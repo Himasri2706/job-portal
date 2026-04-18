@@ -4,8 +4,6 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from models import db, User, JobListing, Application
-import requests
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your-very-secret-key-12345'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///jobportal.db'
@@ -307,6 +305,8 @@ def init_db():
             db.session.commit()
             print("Default admin created (admin / admin123)")
 
+# Initialize database on import (vital for production servers like Gunicorn)
+init_db()
+
 if __name__ == '__main__':
-    init_db()
     app.run(host='0.0.0.0', debug=True, port=5000)
