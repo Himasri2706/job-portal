@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white border-bottom p-4">
+                <h3 class="fw-bold mb-0">Post a New Job</h3>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form action="{{ url_for('post_job') }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label fw-semibold text-secondary">Job Title</label>
+                            <input type="text" name="title" class="form-control bg-light border-0" required placeholder="e.g. Senior Software Engineer">
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label fw-semibold text-secondary">Company Name</label>
+                            <input type="text" name="company" class="form-control bg-light border-0" required placeholder="Your Company">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label fw-semibold text-secondary">Location</label>
+                            <input type="text" name="location" class="form-control bg-light border-0" placeholder="e.g. Remote, New York">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label fw-semibold text-secondary">Salary</label>
+                            <input type="text" name="salary" class="form-control bg-light border-0" placeholder="e.g. $100k - $120k">
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <label class="form-label fw-semibold text-secondary">Category</label>
+                            <select name="category" class="form-select bg-light border-0">
+                                <option value="IT">IT & Software</option>
+                                <option value="Data">Data & Analytics</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-secondary">Job Description</label>
+                        <textarea name="description" class="form-control bg-light border-0" rows="8" required placeholder="Describe the role, responsibilities, and requirements..."></textarea>
+                    </div>
+                    
+                    <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-sm">Publish Job</button>
+                        <a href="{{ url_for('employer_dashboard') }}" class="btn btn-outline-secondary rounded-pill px-4 fw-semibold">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

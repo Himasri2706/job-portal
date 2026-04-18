@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section text-center py-5 mb-5 rounded-4 bg-light position-relative overflow-hidden">
+    <div class="container position-relative z-1">
+        <h1 class="display-4 fw-bold text-dark mb-3 animate-up">Find Your Dream Job Today</h1>
+        <p class="lead text-secondary mb-4 animate-up delay-1">Search through thousands of listings to find the perfect fit for you.</p>
+        
+        <div class="card shadow-lg border-0 rounded-pill p-2 mx-auto search-card animate-up delay-2">
+            <form action="{{ url_for('index') }}" method="GET" class="d-flex w-100 flex-column flex-md-row">
+                <input type="text" name="q" class="form-control border-0 px-4" placeholder="Job title, keywords, or company" value="{{ q or '' }}">
+                <div class="vr mx-2 d-none d-md-block"></div>
+                <input type="text" name="location" class="form-control border-0 px-4" placeholder="Location" value="{{ loc or '' }}">
+                <div class="vr mx-2 d-none d-md-block"></div>
+                <select name="category" class="form-select border-0 px-4 text-secondary">
+                    <option value="">Any Category</option>
+                    <option value="IT" {% if cat == 'IT' %}selected{% endif %}>IT & Software</option>
+                    <option value="Data" {% if cat == 'Data' %}selected{% endif %}>Data & Analytics</option>
+                    <option value="Marketing" {% if cat == 'Marketing' %}selected{% endif %}>Marketing</option>
+                    <option value="Finance" {% if cat == 'Finance' %}selected{% endif %}>Finance</option>
+                    <option value="Healthcare" {% if cat == 'Healthcare' %}selected{% endif %}>Healthcare</option>
+                </select>
+                <button type="submit" class="btn btn-primary rounded-pill px-5 py-2 ms-md-2 fw-semibold mt-2 mt-md-0 shadow"><i class="bi bi-search me-2"></i>Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col">
+        <h3 class="fw-bold text-dark mb-4">Recent Job Openings</h3>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% for job in jobs %}
+    <div class="col-md-6 col-lg-4 d-flex align-items-stretch">
+        <div class="card job-card shadow-sm border-0 rounded-4 w-100 h-100 p-3 transition-hover">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="company-logo bg-light rounded shadow-sm d-flex justify-content-center align-items-center text-primary fw-bold fs-4">
+                        {{ job.company[0]|upper }}
+                    </div>
+                    <span class="badge bg-soft-primary text-primary rounded-pill px-3 py-2 fw-medium">{{ job.category or 'General' }}</span>
+                </div>
+                
+                <h5 class="card-title fw-bold text-dark mb-1">{{ job.title }}</h5>
+                <h6 class="card-subtitle text-muted mb-3"><i class="bi bi-building me-1"></i>{{ job.company }}</h6>
+                
+                <div class="d-flex flex-wrap gap-2 mb-4 text-secondary small fw-medium mt-auto">
+                    <span><i class="bi bi-geo-alt text-danger me-1"></i>{{ job.location or 'Remote' }}</span>
+                    <span><i class="bi bi-currency-dollar text-success me-1"></i>{{ job.salary or 'Not specified' }}</span>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-muted"><i class="bi bi-clock me-1"></i>{{ job.date_posted.strftime('%b %d, %Y') }}</small>
+                    <a href="{{ url_for('job_detail', job_id=job.id) }}" class="btn btn-outline-primary rounded-pill btn-sm fw-semibold px-4">Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center py-5">
+        <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png" alt="No jobs" style="width: 120px; opacity: 0.5;" class="mb-3">
+        <h4 class="text-muted fw-bold">No jobs found!</h4>
+        <p class="text-secondary">Try adjusting your search filters.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary rounded-pill mt-2">Clear Filters</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,95 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fc;
+    color: #333;
+}
+
+/* Navbar */
+.glass-nav {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+}
+
+.avatar-circle {
+    width: 32px;
+    height: 32px;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Animations */
+.animate-up {
+    animation: fadeInUp 0.8s ease backwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.transition-hover {
+    transition: all 0.3s ease;
+}
+
+.transition-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, rgb(240, 246, 255) 0%, rgb(220, 235, 255) 100%);
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(13,110,253,0.1) 0%, rgba(255,255,255,0) 70%);
+}
+
+.search-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    max-width: 900px;
+}
+
+/* Job Cards */
+.company-logo {
+    width: 48px;
+    height: 48px;
+}
+.bg-soft-primary { background-color: rgba(13, 110, 253, 0.1); }
+.text-soft-primary { color: #0d6efd; }
+
+/* Dashboard tables */
+.table th {
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table td { vertical-align: middle; }
+
+/* Custom Forms */
+.form-control:focus, .form-select:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+    background-color: #fff !important;
+}
